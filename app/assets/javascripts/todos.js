@@ -1,5 +1,3 @@
-// Place all the behaviors and hooks related to the matching controller here.
-// All this logic will automatically be available in application.js.
 function toggleDone() {
   $(this).parent().parent().toggleClass("success");
   updateCounters();
@@ -31,6 +29,23 @@ function createTodo(title) {
     .append($('<td>').append(label));
 
   $("#todoList").append( tableRow );
+
+  function createTodo(title) {
+  // ...
+  updateCounters();
+
+  var newTodo = { title: title, completed: false };
+
+  $.ajax({
+    type: "POST",
+    url: "/todos.json",
+    data: JSON.stringify({
+        todo: newTodo
+    }),
+    contentType: "application/json",
+    dataType: "json"
+  });
+}
 
   updateCounters();
 }
